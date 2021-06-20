@@ -3,7 +3,7 @@
 // Function that replaces fallen images
 function imgError(image) {
     image.onerror = "";
-    image.src = "https://github.com/lextomato/ShopOnlineFrontend/blob/master/docs/assets/imgError.jpg";
+    image.src = "https://raw.githubusercontent.com/lextomato/ShopOnlineFrontend/master/docs/assets/imgError.jpg";
     return true;
 }
 // End.
