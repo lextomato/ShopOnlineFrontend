@@ -10,7 +10,7 @@ function imgError(image) {
 
 // Function that brings elements filtered by search from the server
 function searching(id, key){
-    const API_URL = 'http://localhost:8000';
+    const API_URL = 'https://vast-reef-96012.herokuapp.com/';
     let dataSearch = document.getElementsByName('search')[0].value;
     let ext_URL = `/api/search/?ordering=${key}&search=${dataSearch}`;
     let data = null;
@@ -236,7 +236,7 @@ function toCart(id) {
 
     let ul = document.createElement('ul');
     ul.setAttribute('id', 'cartList');
-    const API_URL = 'http://localhost:8000';
+    const API_URL = 'https://vast-reef-96012.herokuapp.com/';
     const ext_URL = '/api/search';
 
     total = 0; // variable initialization of the purchase total
@@ -303,7 +303,7 @@ function toCart(id) {
 
 
 // <--- WEB APP FLOW --->
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://vast-reef-96012.herokuapp.com/';
 var idGlobal = 0;
 var keyGlobal = '';
 var cartGlobal = [];
