@@ -34,12 +34,12 @@ function searching(id, key){
 // Function to request data to the REST API, by Fecth request
 function fetchNow(ext_URL, API_URL){
     let data = fetch(`${API_URL}${ext_URL}`, {
-        'mode': 'cors',
-	        'headers': {
-                "Access-Control-Allow-Headers" : "Content-Type",
-                "Access-Control-Allow-Origin": "https://vast-reef-96012.herokuapp.com",
-                "Access-Control-Allow-Methods": "GET"
-        	}
+        method: 'GET', // or 'PUT'
+        headers:{
+            "Access-Control-Allow-Headers" : "*",
+            "Access-Control-Allow-Origin": "https://vast-reef-96012.herokuapp.com"
+        },
+        mode: 'cors'
     })
         .then((response) => response.json())
     return data;
