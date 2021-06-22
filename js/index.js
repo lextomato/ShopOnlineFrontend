@@ -33,7 +33,7 @@ function searching(id, key){
 
 // Function to request data to the REST API, by Fecth request
 function fetchNow(ext_URL, API_URL){
-    let data = fetch(`https://hidden-peak-45041.herokuapp.com/${API_URL}${ext_URL}`, { method: 'GET'})
+    let data = fetch(`${API_URL}${ext_URL}`, { method: 'GET'})
         .then((response) => response.json())
     return data;
 }
