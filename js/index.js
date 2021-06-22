@@ -36,8 +36,9 @@ function fetchNow(ext_URL, API_URL){
     let data = fetch(`${API_URL}${ext_URL}`, {
         'mode': 'cors',
 	        'headers': {
-            	'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': "*"
+                "Access-Control-Allow-Headers" : "Content-Type",
+                "Access-Control-Allow-Origin": "https://vast-reef-96012.herokuapp.com",
+                "Access-Control-Allow-Methods": "GET"
         	}
     })
         .then((response) => response.json())
