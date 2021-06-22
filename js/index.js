@@ -33,8 +33,8 @@ function searching(id, key){
 
 // Function to request data to the REST API, by Fecth request
 function fetchNow(ext_URL, API_URL){
-    let data = fetch(`${API_URL}${ext_URL}`, { method: 'GET'})
-        .then((response) => response.json())
+    let data = fetch(`${API_URL}${ext_URL}`)
+        .then(response => response.json())
     return data;
 }
 // End.
