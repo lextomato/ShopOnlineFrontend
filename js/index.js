@@ -33,10 +33,14 @@ function searching(id, key){
 
 // Function to request data to the REST API, by Fecth request
 function fetchNow(ext_URL, API_URL){
-    let data = fetch(`${API_URL}${ext_URL}`, {
-        method: 'GET',
-        mode: 'cors'
-    })
+    let myHeaders = new Headers();
+
+    let myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
+
+    let data = fetch(`${API_URL}${ext_URL}`, myInit)
         .then((response) => response.json())
     return data;
 }
