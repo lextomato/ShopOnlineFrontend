@@ -1,11 +1,11 @@
 // <--- FUNCTIONS --->
 
-// Function that replaces fallen images
-function imgError(image) {
-    image.onerror = "";
-    image.src = "assets/imgError.jpg";
-    return true;
-}
+// Function that replaces fallen images (function mistakenly removes "GET null")
+// function imgError(image) {
+//     image.onerror = "";
+//     image.src = "assets/imgError.jpg";
+//     return true;
+// }
 // End.
 
 // Function that brings elements filtered by search from the server
@@ -13,7 +13,6 @@ function searching(id, key){
     const API_URL = 'https://vast-reef-96012.herokuapp.com';
     let dataSearch = document.getElementsByName('search')[0].value;
     let ext_URL = `/api/search/?ordering=${key}&search=${dataSearch}`;
-    let data = null;
     const HTMLResponse = document.querySelector("#products");
     const HTMLResponseChild = document.querySelector("#filter");
     const HTMLNoResults = document.querySelector("#noResults");
@@ -26,7 +25,7 @@ function searching(id, key){
         HTMLResponse.removeChild(HTMLResponseChild);
     }
     // .
-    data = fetchNow(ext_URL, API_URL); // request for filtered items
+    let data = fetchNow(ext_URL, API_URL); // request for filtered items
     paintHTML(data, id); // paint html with new elements
     }
 // End.
@@ -64,6 +63,13 @@ function paintHTML(data, id) {
         products.forEach(product => {
             countElem++; // counter of items brought from the server
 
+            // Conditional that overrides the "imgError" function
+            let imgProduct = product.url_image;
+            if (imgProduct == '' || imgProduct == null) {
+                imgProduct = 'assets/imgError.jpg';
+            }
+            // End .
+
             let elem = document.createElement('div');
             elem.setAttribute('class', 'col mb-5');
     
@@ -72,8 +78,8 @@ function paintHTML(data, id) {
     
             let img = document.createElement('img');
             img.setAttribute('class', 'card-img-top');
-            img.setAttribute('src', `${product.url_image}`);
-            img.setAttribute('onerror', 'imgError(this);');
+            // img.setAttribute('onerror', `imgError(this);`);
+            img.setAttribute('src', `${imgProduct}`); // variable (imgProduct) checked for images is replaced
     
             let card_body = document.createElement('div');
             card_body.setAttribute('class', 'card-body p-4');
@@ -141,7 +147,6 @@ function paintHTML(data, id) {
             // Conditional to separate categorized products
             if (id != 0) {
                 if (id == product.category) {
-                    console.log('filtrado');
                     div.appendChild(elem);
                 } else {
                     countElemControl++; // counter of non-matching items according to selected category
@@ -157,7 +162,7 @@ function paintHTML(data, id) {
             let noResults = document.createElement('p');
             noResults.setAttribute('id', 'noResults');
             noResults.setAttribute('class', 'fs-1 text-center');
-            noResults.appendChild(document.createTextNode('No se encontraron productos'));
+            noResults.appendChild(document.createTextNode('No se encontraron productos, intente con otra palabra'));
             HTMLResponseProducts.appendChild(noResults);
         }
         // End.
@@ -180,6 +185,7 @@ function capitalizeFirtsLetter(str) {
 // function to bring the products according to the selected category
 function categorize(id) {
     idGlobal = id;
+    document.getElementsByName('search')[0].value = '';
     searching(idGlobal, keyGlobal, cartGlobal);
 }
 // End.
@@ -237,7 +243,7 @@ function toCart(id) {
     let ul = document.createElement('ul');
     ul.setAttribute('id', 'cartList');
     const API_URL = 'https://vast-reef-96012.herokuapp.com';
-    const ext_URL = '/api/search';
+    const ext_URL = '/api/search/';
 
     total = 0; // variable initialization of the purchase total
     elementsCart++; // total products counter
